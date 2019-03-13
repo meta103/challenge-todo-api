@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const mongoose = require('mongoose');
-const {ObjectId} = mongoose.Types;
+const { ObjectId } = mongoose.Types;
 
 // Require Todo model in our routes module
 let Todo = require('../models/Todo');
@@ -18,9 +18,9 @@ class TodosController {
     }
   }
 
-  async getTodo(req, res){
-    const {id} = req.params;
-    if(!ObjectId.isValid(id) && !id.match(/^[a-fA-F0-9]{24}$/)){
+  async getTodo(req, res) {
+    const { id } = req.params;
+    if (!ObjectId.isValid(id) && !id.match(/^[a-fA-F0-9]{24}$/)) {
       return res.status(404).send({
         success: 'false',
         message: 'todo does not exist',
@@ -53,11 +53,11 @@ class TodosController {
     }
   }
 
-  async updateTodo(req, res){
-    const {id} = req.params;
+  async updateTodo(req, res) {
+    const { id } = req.params;
     const data = req.body;
 
-    if(!ObjectId.isValid(id) && !id.match(/^[a-fA-F0-9]{24}$/)){
+    if (!ObjectId.isValid(id) && !id.match(/^[a-fA-F0-9]{24}$/)) {
       return res.status(404).send({
         success: 'false',
         message: 'todo does not exist',
@@ -71,7 +71,7 @@ class TodosController {
     }
 
     try {
-      const updated = await Todo.findByIdAndUpdate(id, data, {new:true});
+      const updated = await Todo.findByIdAndUpdate(id, data, { new: true });
       return res.status(200).json(updated);
 
     } catch (error) {
@@ -79,9 +79,9 @@ class TodosController {
     }
   }
 
-  async deleteTodo(req, res){
-    const {id} = req.params;
-    if(!ObjectId.isValid(id) && !id.match(/^[a-fA-F0-9]{24}$/)){
+  async deleteTodo(req, res) {
+    const { id } = req.params;
+    if (!ObjectId.isValid(id) && !id.match(/^[a-fA-F0-9]{24}$/)) {
       return res.status(404).send({
         success: 'false',
         message: 'todo does not exist',
